@@ -530,7 +530,7 @@ Parameters:
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
       letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
       (-).
-    Default: aws-quickstart
+    Default: aws-ia-us-east-1
     Description: The S3 bucket you’ve created for your copy of Quick Start assets, if you decide to customize or extend the Quick Start for your own use.
       The bucket name can include numbers, lowercase letters, uppercase letters, and hyphens,
       but should not start or end with a hyphen.
@@ -544,7 +544,7 @@ Parameters:
     AllowedPattern: '^[a-zA-Z0-9\-\/]+$'
     ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters,
       uppercase letters, hyphens (-), and forward slash (/).
-    Default: quickstart-microsoft-exchange/
+    Default: cfn-ps-microsoft-exchange/
     Description: The S3 key name prefix used to simulate a folder for your copy of Quick Start assets, if you decide to customize or extend the Quick Start for your own use.
       This prefix can include numbers, lowercase letters, uppercase letters, hyphens, and forward slashes, but should not start or end with a forward slash (which is automatically added).
     Type: String
@@ -632,7 +632,7 @@ Conditions:
     - !Equals
       - !Ref NumberOfRDGWHosts
       - '0'
-  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
+  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-ia-us-east-1']
   AppInsightsEnabled: !Equals [!Ref SetupAppInsightsMonitoring, true]
 Resources:
   VPCStack:
@@ -640,7 +640,7 @@ Resources:
     Properties:
       TemplateURL:
         Fn::Sub:
-          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-aws-vpc/templates/aws-vpc.template.yaml'
+          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-aws-vpc/templates/aws-vpc.template.yaml'
           - S3Region: !If
               - UsingDefaultBucket
               - !Ref AWS::Region
@@ -672,7 +672,7 @@ Resources:
     Properties:
       TemplateURL:
         Fn::Sub:
-          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-activedirectory/templates/ad-1.template'
+          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-activedirectory/templates/ad-1.template'
           - S3Region: !If
               - UsingDefaultBucket
               - !Ref AWS::Region
@@ -697,7 +697,7 @@ Resources:
         PrivateSubnet2ID: !GetAtt 'VPCStack.Outputs.PrivateSubnet2AID'
         QSS3BucketName: !Ref 'QSS3BucketName'
         QSS3BucketRegion: !Ref 'QSS3BucketRegion'
-        QSS3KeyPrefix: !Sub '${QSS3KeyPrefix}submodules/quickstart-microsoft-activedirectory/'
+        QSS3KeyPrefix: !Sub '${QSS3KeyPrefix}submodules/cfn-ps-microsoft-activedirectory/'
         VPCCIDR: !Ref 'VPCCIDR'
         VPCID: !GetAtt 'VPCStack.Outputs.VPCID'
   RDGWStack:
@@ -706,7 +706,7 @@ Resources:
     Properties:
       TemplateURL:
         Fn::Sub:
-          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-rdgateway/templates/rdgw-domain.template'
+          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-rdgateway/templates/rdgw-domain.template'
           - S3Region: !If
               - UsingDefaultBucket
               - !Ref AWS::Region
@@ -727,7 +727,7 @@ Resources:
         PublicSubnet2ID: !GetAtt 'VPCStack.Outputs.PublicSubnet2ID'
         QSS3BucketName: !Ref 'QSS3BucketName'
         QSS3BucketRegion: !Ref 'QSS3BucketRegion'
-        QSS3KeyPrefix: !Sub '${QSS3KeyPrefix}submodules/quickstart-microsoft-rdgateway/'
+        QSS3KeyPrefix: !Sub '${QSS3KeyPrefix}submodules/cfn-ps-microsoft-rdgateway/'
         RDGWInstanceType: !Ref 'RDGWInstanceType'
         RDGWCIDR: !Ref 'RDGWCIDR'
         VPCID: !GetAtt 'VPCStack.Outputs.VPCID'
