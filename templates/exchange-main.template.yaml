@@ -125,7 +125,7 @@ Metadata:
       DomainNetBIOSName:
         default: Domain NetBIOS name
       EnableBackups:
-        default: Enable AWS Backups 
+        default: Enable AWS Backups
       EdgeInstanceType:
         default: Edge Role instance type
       EdgeNode1NetBIOSName:
@@ -163,7 +163,7 @@ Metadata:
       ExchangeNode3PrivateIP2:
         default: Exchange Node 3 private IP address 2
       ExchangeNodeInstanceType:
-        default: Instance type for Exchange nodes 
+        default: Instance type for Exchange nodes
       FileServerInstanceType:
         default: File Server instance type
       FileServerNetBIOSName:
@@ -171,7 +171,7 @@ Metadata:
       FileServerPrivateIP:
         default: File Server private IP address
       IncludeEdgeTransportRole:
-        default: Deploy Edge servers    
+        default: Deploy Edge servers
       KeyPairName:
         default: Key pair name
       NumberOfRDGWHosts:
@@ -672,7 +672,7 @@ Resources:
     Properties:
       TemplateURL:
         Fn::Sub:
-          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-activedirectory/templates/ad-1.template'
+          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-activedirectory/templates/ad-1.template.yaml'
           - S3Region: !If
               - UsingDefaultBucket
               - !Ref AWS::Region
@@ -706,7 +706,7 @@ Resources:
     Properties:
       TemplateURL:
         Fn::Sub:
-          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-rdgateway/templates/rdgw-domain.template'
+          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-rdgateway/templates/rdgw-domain.template.yaml'
           - S3Region: !If
               - UsingDefaultBucket
               - !Ref AWS::Region
