@@ -519,7 +519,7 @@ Parameters:
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
       letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
       (-).
-    Default: aws-quickstart
+    Default: aws-ia-us-east-1
     Description: S3 bucket name for the Quick Start assets. Quick Start bucket name
       can include numbers, lowercase letters, uppercase letters, and hyphens (-).
       It cannot start or end with a hyphen (-).
@@ -533,7 +533,7 @@ Parameters:
     AllowedPattern: '^[a-zA-Z0-9\-\/]+$'
     ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters,
       uppercase letters, hyphens (-), and forward slash (/).
-    Default: quickstart-microsoft-exchange/
+    Default: cfn-ps-microsoft-exchange/
     Description: S3 key prefix for the Quick Start assets. Quick Start key prefix
       can include numbers, lowercase letters, uppercase letters, hyphens (-), and
       forward slash (/).
@@ -594,7 +594,7 @@ Parameters:
     Default: '/aws/service/ami-windows-latest/Windows_Server-2022-English-Full-Base'
     Description: The image name for the AWS Systems Manager Windows Server 2022 AMI ID lookup
 Conditions:
-  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
+  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-ia-us-east-1']
   DeployEdge: !Equals [!Ref IncludeEdgeTransportRole, 'yes']
   DeployLoadBalancer: !Equals [!Ref DeployLoadBalancer, 'true']
   Exchange2016Selected: !Equals [!Ref ExchangeServerVersion, '2016']
@@ -877,7 +877,7 @@ Resources:
             C:\cfn\modules\AWSQuickStart.zip:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/modules/AWSQuickStart.zip
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -890,7 +890,7 @@ Resources:
             C:\cfn\scripts\Unzip-Archive.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Unzip-Archive.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -903,7 +903,7 @@ Resources:
             C:\cfn\scripts\Rename-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Rename-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Rename-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -916,7 +916,7 @@ Resources:
             C:\cfn\scripts\Restart-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Restart-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Restart-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -942,7 +942,7 @@ Resources:
             C:\cfn\scripts\Enable-CredSSP.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Enable-CredSSP.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Enable-CredSSP.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -955,7 +955,7 @@ Resources:
             C:\cfn\scripts\Disable-CredSSP.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Disable-CredSSP.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Disable-CredSSP.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1007,7 +1007,7 @@ Resources:
             c:\cfn\scripts\Set-PrimaryDNSSuffix.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1398,7 +1398,7 @@ Resources:
             C:\cfn\modules\AWSQuickStart.zip:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/modules/AWSQuickStart.zip
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1411,7 +1411,7 @@ Resources:
             C:\cfn\scripts\Unzip-Archive.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Unzip-Archive.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1424,7 +1424,7 @@ Resources:
             C:\cfn\scripts\Rename-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Rename-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Rename-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1437,7 +1437,7 @@ Resources:
             C:\cfn\scripts\Restart-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Restart-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Restart-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1463,7 +1463,7 @@ Resources:
             C:\cfn\scripts\Enable-CredSSP.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Enable-CredSSP.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Enable-CredSSP.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1476,7 +1476,7 @@ Resources:
             C:\cfn\scripts\Disable-CredSSP.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Disable-CredSSP.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Disable-CredSSP.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1528,7 +1528,7 @@ Resources:
             c:\cfn\scripts\Set-PrimaryDNSSuffix.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1939,7 +1939,7 @@ Resources:
             C:\cfn\scripts\Unzip-Archive.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Unzip-Archive.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1952,7 +1952,7 @@ Resources:
             C:\cfn\modules\AWSQuickStart.zip:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/modules/AWSQuickStart.zip
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -1991,7 +1991,7 @@ Resources:
             C:\cfn\scripts\Rename-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Rename-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Rename-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -2358,7 +2358,7 @@ Resources:
             C:\cfn\scripts\Unzip-Archive.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Unzip-Archive.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -2371,7 +2371,7 @@ Resources:
             C:\cfn\modules\AWSQuickStart.zip:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/modules/AWSQuickStart.zip
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -2384,7 +2384,7 @@ Resources:
             C:\cfn\scripts\Rename-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Rename-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Rename-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -2397,7 +2397,7 @@ Resources:
             C:\cfn\scripts\Restart-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Restart-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Restart-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -2423,7 +2423,7 @@ Resources:
             C:\cfn\scripts\Enable-CredSSP.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Enable-CredSSP.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Enable-CredSSP.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -2436,7 +2436,7 @@ Resources:
             C:\cfn\scripts\Disable-CredSSP.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Disable-CredSSP.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Disable-CredSSP.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3041,7 +3041,7 @@ Resources:
             C:\cfn\scripts\Unzip-Archive.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Unzip-Archive.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3054,7 +3054,7 @@ Resources:
             C:\cfn\modules\AWSQuickStart.zip:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/modules/AWSQuickStart.zip
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3067,7 +3067,7 @@ Resources:
             C:\cfn\scripts\Rename-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Rename-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Rename-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3080,7 +3080,7 @@ Resources:
             C:\cfn\scripts\Restart-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Restart-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Restart-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3106,7 +3106,7 @@ Resources:
             C:\cfn\scripts\Enable-CredSSP.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Enable-CredSSP.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Enable-CredSSP.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3119,7 +3119,7 @@ Resources:
             C:\cfn\scripts\Disable-CredSSP.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Disable-CredSSP.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Disable-CredSSP.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3675,7 +3675,7 @@ Resources:
             C:\cfn\scripts\Unzip-Archive.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Unzip-Archive.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3688,7 +3688,7 @@ Resources:
             C:\cfn\modules\AWSQuickStart.zip:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/modules/AWSQuickStart.zip
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3701,7 +3701,7 @@ Resources:
             C:\cfn\scripts\Rename-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Rename-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Rename-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3714,7 +3714,7 @@ Resources:
             C:\cfn\scripts\Restart-Computer.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Restart-Computer.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Restart-Computer.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3740,7 +3740,7 @@ Resources:
             C:\cfn\scripts\Enable-CredSSP.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Enable-CredSSP.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Enable-CredSSP.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
@@ -3753,7 +3753,7 @@ Resources:
             C:\cfn\scripts\Disable-CredSSP.ps1:
               source:
                 !Sub
-                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Disable-CredSSP.ps1
+                - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/cfn-ps-microsoft-utilities/scripts/Disable-CredSSP.ps1
                 - S3Region: !If
                     - UsingDefaultBucket
                     - !Ref AWS::Region
