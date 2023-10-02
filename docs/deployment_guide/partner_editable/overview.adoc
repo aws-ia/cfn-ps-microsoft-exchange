@@ -1,10 +1,18 @@
-This guide covers the information you need to deploy the {partner-product-name} Partner Solution in the AWS Cloud.
+This Partner Solution deploys Microsoft Exchange on the AWS Cloud. If you are unfamiliar with AWS Partner Solutions, refer to the https://fwd.aws/rA69w?[AWS Partner Solution General Information Guide^].
 
-// Fill in the info in <angle brackets> for use on the landing page only: 
-This Amazon Web Services (AWS) Partner Solution deploys [<product name>](<partner's marketing product page>) in the AWS Cloud so that <purpose>. This solution is for <target users> who want to <do what> so that <why>. For more information, refer to the [<product name> documentation](<URL>).
+In addition to this Partner Solution, we published a set of Microsoft-based Partner Solutions that you can use to deploy other common Microsoft workloads on AWS, which include the following:
 
-// Deploying this solution does not guarantee an organization’s compliance with any laws, certifications, policies, or other regulations. [Uncomment this statement only for solutions that relate to compliance. We'll add the corresponding reference part to the landing page and get legal approval before publishing.]
+* Microsoft Active Directory
+* Remote Desktop Gateway (RD Gateway)
+* Microsoft SharePoint Server
+* Microsoft Web Application Proxy with Active Directory Federation Services (ADFS)
+* Microsoft SQL Server
+* Windows Server Update Services
 
-// For advanced information about the product, troubleshooting, or additional functionality, refer to the https://{partner-solution-github-org}.github.io/{partner-solution-project-name}/operational/index.html[Operational Guide^].
+Each of these Partner Solutions includes a virtual private cloud (VPC) environment, which is deployed based on AWS best practices. For more information about using Partner Solutions to deploy Microsoft workloads, refer to https://aws.amazon.com/quickstart/?solutions-all.sort-by=item.additionalFields.sortDate&solutions-all.sort-order=desc&awsf.filter-tech-category=*all&awsf.filter-industry=*all&awsf.filter-content-type=content-type%23quick-start&solutions-all.q=microsoft&solutions-all.q_operator=AND[AWS Partner Solutions^].
 
-// For information about using this Partner Solution for migrations, refer to the https://{partner-solution-github-org}.github.io/{partner-solution-project-name}/migration/index.html[Migration Guide^].
+// For more information on deploying Microsoft Exchange on the AWS Cloud, see the https://aws-quickstart.github.io/quickstart-microsoft-exchange/operational/index.html[Operational Guide].
+
+// For advanced information about the product that this Partner Solution deploys, refer to the https://{quickstart-github-org}.github.io/{quickstart-project-name}/operational/index.html[Operational Guide^].
+
+// For information about using this Partner Solution for migrations, refer to the https://{quickstart-github-org}.github.io/{quickstart-project-name}/migration/index.html[Migration Guide^].

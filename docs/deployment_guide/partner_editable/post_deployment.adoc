@@ -1,3 +1,95 @@
-// Include any postdeployment steps here, such as steps necessary to test that the deployment was successful. If there are no postdeployment steps, leave this file empty.
-
 == Postdeployment steps
+
+=== Update Windows
+
+To help ensure that the deployed servers' operating systems and installed applications have the latest Microsoft updates, run update Windows on each server.
+
+. Create an RDP session from the Remote Desktop Gateway server to each deployed server.
+. Navigate to the *Settings* application.
+. Navigate to *Update & Security*.
+. Choose *Check for updates*.
+. Install any updates and reboot if necessary.
+
+=== (Optional) Create database copies
+
+This Partner Solution creates a database availability group (DAG) and adds to it the Exchange nodes. As part of the Exchange installation, each node contains a mailbox database. The first node contains a database called `DB1`, and the second node contains a database called `DB2`.
+
+As part of configuring high availability for the mailbox roles, you can add mailbox database copies to other Exchange nodes. Alternatively, you can create new databases and then create additional copies. To create a second copy for the initial databases, use the following commands:
+
+----
+Add-MailboxDatabaseCopy -Identity DB1 –MailboxServer ExchangeNode2 -ActivationPreference 2
+
+Add-MailboxDatabaseCopy -Identity DB2 –MailboxServer ExchangeNode1 -ActivationPreference 2
+----
+
+=== (Optional) Create a DNS entry for the Network Load Balancer
+
+. If you deploy a Network Load Balancer, it has an endpoint address, such as `elb.amazonaws.com`.
+. To use the load balancer with your Exchange namespace, create a CNAME record in Active Directory that points to the Application Load Balancer.
+. Before proceeding, navigate to the https://console.aws.amazon.com/ec2/v2/home[Amazon EC2 console^], and under *Load balancer*, choose the load balancer that the Partner Solution created.
+.  Copy the value listed under the DNS name, as shown in Figure 7.
+
+[#architecture7]
+.Creating a DNS entry for the Network Load Balancer
+image::../docs/deployment_guide/images/image7.png[Architecture,width=646,height=275]
+
+[start=5]
+. To create the DNS record, use Remote Desktop with your domain credentials to connect to one of the domain controllers, and open the DNS console by navigating to the *Start* menu and entering `DNS`.
+. In the DNS console, navigate to the Active Directory in the applicable Availability Zone, and choose *New Alias (CNAME)*, as shown in Figure 8.
+
+[#architecture8]
+.Selecting New Alias (CNAME)
+image::../docs/deployment_guide/images/image8.png[Architecture,width=355,height=557]
+
+[start=7]
+. Create a DNS entry, such as *mail*, and in *fully qualified domain name (FQDN) for target host*, paste the value of the Application Load Balancer endpoint, as shown in Figure 9.
+
+[#architecture9]
+.Creating the DNS entry ("mail")
+image::../docs/deployment_guide/images/image9.png[Architecture,width=422,height=480]
+
+[start=8]
+. Verify that the DNS entry successfully resolves by running `nslookup`. Navigate to *Start* and enter `cmd`. In the command line, enter the following (where *mail* is the name of your CNAME record and *example.com* is the domain name of your Active Directory):
+
+Nslookup _mail.example.com_
+
+[start=9]
+. Ensure that the record resolves to the load balancer DNS record, as shown in Figure 10.
+
+[#architecture10]
+.Verifying the DNS record
+image::../docs/deployment_guide/images/image10.png[Architecture,width=647,height=278]
+
+
+[[high-availability-and-disaster-recovery]]
+=== High availability and disaster recovery
+
+Amazon EC2 provides the ability to place instances in multiple AWS Regions and Availability Zones. For more information, refer to https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/using-regions-availability-zones.html[Regions and Zones^].
+
+By launching your instances in separate Regions, you can design your application to be closer to specific customers or to meet legal or other requirements. By launching your instances in separate Availability Zones, you can protect your applications from the failure of a single location. Exchange provides infrastructure features that complement the high availability and disaster recovery scenarios supported in the AWS Cloud.
+
+[[automatic-failover]]
+=== Automatic failover
+
+Deploying this Partner Solution with the *default parameters* configures a two-node DAG with a file share witness. The DAG uses Windows Server Failover Clustering for automatic failover.
+
+The Partner Solution implementation supports the following scenarios:
+
+* Protection from the failure of a single instance
+* Automatic failover between the cluster nodes
+* Automatic failover between Availability Zones
+
+This Partner Solution's default implementation, however, doesn’t provide automatic failover in every case. For example, the loss of Availability Zone 1, which contains the primary node and file share witness, would prevent automatic failover to Availability Zone 2. This is because the cluster would fail as it loses quorum. In this scenario, you could follow manual disaster recovery steps that include restarting the cluster service and forcing a quorum on the second cluster node (for example, `ExchangeNode2`) to restore application availability.
+
+This Partner Solution can deploy to three Availability Zones, which can mitigate the loss of quorum if a node fails. Note that you can choose this option only in AWS Regions that include three or more Availability Zones. For a current list, refer to https://aws.amazon.com/about-aws/global-infrastructure/[Global Infrastructure^].
+
+Consult the https://docs.microsoft.com/en-us/Exchange/exchange-server?view=exchserver-2019[Exchange Server documentation^] and customize the steps described (for example, deploy additional cluster nodes and configure mailbox database copies) to deploy a solution that meets your business, IT, and security requirements.
+
+[[security-groups-and-firewalls]]
+=== Security groups and firewalls
+
+When the Amazon EC2 instances launch, they must be associated with a security group, which acts as a stateful firewall. You control the network traffic entering or leaving the security group, and you can build granular rules that are scoped by protocol, port number, and source or destination IP address or subnet. By default, all outgoing security-group traffic is permitted. Inbound traffic, however, must be configured to allow the appropriate traffic to reach your instances.
+
+Domain controllers and member servers require several security group rules to allow traffic for services such as AD DS replication, user authentication, https://docs.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-top[Windows Time service (W32Time)^], and Distributed File System (DFS), among others. The nodes that run Exchange Server permit full communication between each other, as recommended by Microsoft best practices. For more information, refer to https://techcommunity.microsoft.com/t5/exchange-team-blog/exchange-firewalls-and-support-8230-oh-my/ba-p/595710[Exchange, Firewalls, and Support ... Oh, my!^]
+
+Edge node servers (if configured to be deployed) allow port 25 TCP (SMTP) from the entire internet. The Partner Solution creates certain security groups and rules for you.
