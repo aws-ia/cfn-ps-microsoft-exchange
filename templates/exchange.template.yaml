@@ -519,7 +519,7 @@ Parameters:
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
       letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
       (-).
-    Default: aws-ia-us-east-1
+    Default: aws-ia
     Description: S3 bucket name for the Quick Start assets. Quick Start bucket name
       can include numbers, lowercase letters, uppercase letters, and hyphens (-).
       It cannot start or end with a hyphen (-).
@@ -594,7 +594,7 @@ Parameters:
     Default: '/aws/service/ami-windows-latest/Windows_Server-2022-English-Full-Base'
     Description: The image name for the AWS Systems Manager Windows Server 2022 AMI ID lookup
 Conditions:
-  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-ia-us-east-1']
+  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-ia']
   DeployEdge: !Equals [!Ref IncludeEdgeTransportRole, 'yes']
   DeployLoadBalancer: !Equals [!Ref DeployLoadBalancer, 'true']
   Exchange2016Selected: !Equals [!Ref ExchangeServerVersion, '2016']
