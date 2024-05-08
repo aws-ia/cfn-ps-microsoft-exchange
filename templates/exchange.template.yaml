@@ -439,7 +439,7 @@ Parameters:
     Type: String
   Exchange2019Source:
     AllowedPattern: '^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)$'
-    Default: 'https://download.microsoft.com/download/7/5/f/75f4d77e-002c-419c-a03a-948e8eb019f2/ExchangeServer2019-x64-CU13.ISO'
+    Default: 'https://download.microsoft.com/download/b/f/7/bf7700c9-c2fd-40be-82cc-7c5330b5f981/ExchangeServer2019-x64-CU14.ISO'
     Description: Full URL (including https://) for Exchange 2019 ISO.
     MaxLength: '2000'
     MinLength: '1'
